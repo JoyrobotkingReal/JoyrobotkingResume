@@ -2,39 +2,47 @@ import './App.css'
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import APIProject from './components/APIProject';
+import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 
 function App() {
-  // const [count, setCount] = useState(0)
-
-  // const client = new RAWGClient("a14b240a14354297b43f4258c84ac284");
-
-  // client.searchGames("The Witcher 3: Wild Hunt")
-  //     .then(response => {
-  //         console.log(response.results);
-  //     })
-  //     .catch(error => {
-  //         console.error(error);
-  //     });
-
   return (
     <BrowserRouter>
       <div className="App">
-        <header className="App-header">
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/api-project">API Project</Link>
-              </li>
-            </ul>
-          </nav>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/api-project" element={<APIProject />} />
-          </Routes>
-        </header>
+        <AppBar position="static" color="primary" sx={{ mb: 4, boxShadow: 3 }}>
+          <Toolbar>
+            <Typography 
+              variant="h6" 
+              sx={{ flexGrow: 1, fontWeight: 'bold', letterSpacing: 1 }}
+            >
+              Joyrobotking.com
+            </Typography>
+            <Box 
+              component="nav" 
+              sx={{ display: 'flex', gap: 2 }}
+            >
+              <Button 
+          color="inherit" 
+          component={Link} 
+          to="/" 
+          sx={{ textTransform: 'none', fontSize: '1rem' }}
+              >
+          Home
+              </Button>
+              <Button 
+          color="inherit" 
+          component={Link} 
+          to="/api-project" 
+          sx={{ textTransform: 'none', fontSize: '1rem' }}
+              >
+          API Project
+              </Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/api-project" element={<APIProject />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

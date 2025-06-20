@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import './APIProject.css';
+import { Box, Typography, TextField, Button, Select, MenuItem, FormControl, InputLabel, Checkbox, FormControlLabel, Card, CardContent, CardMedia, Link as MuiLink } from '@mui/material';
 import { RAWGClient, type Game } from '../RAWG';
 
 function APIProject() {
@@ -7,20 +7,17 @@ function APIProject() {
     const [rawGames, setRawGames] = useState<Game[]>([]);
     const [input, setInput] = useState('');
     const [filter, setFilter] = useState('latest');
-    const [excludeZeroRating, setExcludeZeroRating] = useState(false); const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const [excludeZeroRating, setExcludeZeroRating] = useState(false);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInput(event.target.value);
     };
 
-    // Reactively filter games whenever rawGames, filter, or excludeZeroRating changes
     const filteredGames = useMemo(() => {
         let games = [...rawGames];
-
-        // Apply zero rating filter first
         if (excludeZeroRating) {
             games = games.filter(game => game.rating > 0);
         }
-
-        // Apply sorting filter
         if (filter === 'latest') {
             games.sort((a: Game, b: Game) => new Date(b.released).getTime() - new Date(a.released).getTime());
         } else if (filter === 'oldest') {
@@ -30,9 +27,10 @@ function APIProject() {
         } else if (filter === 'lowest_rating') {
             games.sort((a: Game, b: Game) => a.rating - b.rating);
         }
-
         return games;
-    }, [rawGames, filter, excludeZeroRating]); const handleSearch = () => {
+    }, [rawGames, filter, excludeZeroRating]);
+
+    const handleSearch = () => {
         if (input) {
             client.searchGames(input)
                 .then(response => {
@@ -46,57 +44,77 @@ function APIProject() {
         }
     };
 
-    const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setFilter(event.target.value);
+    const handleFilterChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setFilter(event.target.value as string);
     };
 
     return (
-        <div>
-            <h1>Video Game Search API</h1>
-            <p>This is a simple tool that uses a free Video Game Database API to allow you to search video games, intended to showcase my ability to use APIs for useful purposes!</p>
-            <a href="https://rawg.io/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', textAlign: 'center', width: '100%' }}>
+        <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4, p: 2 }}>
+            <Typography variant="h3" align="center" gutterBottom>Video Game Search API</Typography>
+            <Typography align="center" sx={{ mb: 2 }}>
+                This is a simple tool that uses a free Video Game Database API to allow you to search video games, intended to showcase my ability to use APIs for useful purposes!
+            </Typography>
+            <MuiLink href="https://rawg.io/" target="_blank" rel="noopener noreferrer" underline="hover" sx={{ display: 'block', textAlign: 'center', mb: 3 }}>
                 RAWG.io is the API source of the data and images you see on this page!
-            </a>
-            <div className="search-container">
-                <div className="input-button-container">
-                    <input
-                        type="text"
-                        placeholder="Search for games..."
-                        value={input}
-                        onChange={handleInputChange}
-                    />
-                    <button onClick={handleSearch} disabled={!input}>
-                        Search
-                    </button>
-                </div>
-                <select value={filter} onChange={handleFilterChange}>
-                    <option value="latest">Latest Released</option>
-                    <option value="oldest">Oldest Released</option>
-                    <option value="highest_rating">Highest Rating</option>
-                    <option value="lowest_rating">Lowest Rating</option>
-                </select>                <label className="exclude-zero-rating">
-                    Exclude Ratings of 0:
-                    <input
-                        type="checkbox"
-                        checked={excludeZeroRating}
-                        onChange={(e) => setExcludeZeroRating(e.target.checked)}
-                    />
-                </label>
-            </div>
-            <div className="game-results">
+            </MuiLink>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap', mb: 3 }}>
+                <TextField
+                    label="Search for games..."
+                    variant="outlined"
+                    value={input}
+                    onChange={handleInputChange}
+                    sx={{ minWidth: 250 }}
+                />
+                <Button variant="contained" onClick={handleSearch} disabled={!input} sx={{ height: 56 }}>
+                    Search
+                </Button>
+                <FormControl sx={{ minWidth: 180 }}>
+                    <InputLabel id="filter-label">Sort By</InputLabel>
+                    <Select
+                        labelId="filter-label"
+                        value={filter}
+                        label="Sort By"
+                        onChange={handleFilterChange}
+                    >
+                        <MenuItem value="latest">Latest Released</MenuItem>
+                        <MenuItem value="oldest">Oldest Released</MenuItem>
+                        <MenuItem value="highest_rating">Highest Rating</MenuItem>
+                        <MenuItem value="lowest_rating">Lowest Rating</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={excludeZeroRating}
+                            onChange={(e) => setExcludeZeroRating(e.target.checked)}
+                        />
+                    }
+                    label="Exclude Ratings of 0"
+                />
+            </Box>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr' }, gap: 3 }}>
                 {filteredGames.length === 0 ? (
-                    <p>No Results</p>
+                    <Typography align="center" sx={{ gridColumn: '1/-1' }}>No Results</Typography>
                 ) : (
                     filteredGames.map((game: Game) => (
-                        <div key={game.id} className="game-card">
-                            <img src={game.background_image} alt={game.name} />
-                            <h3>{game.name}</h3>
-                            <p>Rating: {game.rating}</p>
-                        </div>
+                        <Card key={game.id} sx={{ maxWidth: 345, mx: 'auto' }}>
+                            {game.background_image && (
+                                <CardMedia
+                                    component="img"
+                                    height="180"
+                                    image={game.background_image}
+                                    alt={game.name}
+                                />
+                            )}
+                            <CardContent>
+                                <Typography variant="h6">{game.name}</Typography>
+                                <Typography variant="body2">Rating: {game.rating}</Typography>
+                            </CardContent>
+                        </Card>
                     ))
                 )}
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }
 
