@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './TitleTypewriter.css'; // Import the new CSS file
 
 const TITLES = [
     "Game Developer",
@@ -7,9 +8,6 @@ const TITLES = [
     "Tech Enthusiast",
     "Creative Coder",
 ];
-
-const CursorCharacter1 = "|";
-const CursorCharacter2 = "\u00A0"; // Non-breaking space to avoid height change
 
 const ANIMATION_INTERVAL = 50; // Update every 100ms
 
@@ -128,19 +126,15 @@ const TitleTypewriter: React.FC = () => {
             setAnimationData(new_animationData);
         }, ANIMATION_INTERVAL);
         return () => clearInterval(typeInterval);
-    });
+    }, [animationData]);
 
     return (
-        <>
-            <div className="title-typewriter">
-                <span className="typewriter-text">
-                    {animationData.currentText}
-                    <span className="cursor">
-                        {animationData.cursorFlashCounter % 2 === 0 ? CursorCharacter1 : CursorCharacter2}
-                    </span>
-                </span>
-            </div>
-        </>
+        <div className="title-typewriter terminal-style">
+            <span className={`typewriter-text ${animationData.phase === Phase.Typing || animationData.phase === Phase.Deleting ? 'typing' : ''}`}>
+                <span className="animated-text">{animationData.currentText}</span>
+                <span className="cursor">|</span>
+            </span>
+        </div>
     );
 };
 

@@ -1,0 +1,77 @@
+.title-typewriter {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+    color: #fff;
+}
+
+.terminal-style {
+    background-color: #1e1e1e; /* Dark terminal background */
+    color: #00ff00; /* Bright green text */
+    padding: 20px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.typewriter-text {
+    display: inline-block;
+    position: relative;
+}
+
+.animated-text {
+    animation: fadeIn 0.5s ease-in-out, colorCycle 5s infinite;
+}
+
+.cursor {
+    display: inline-block;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    color: #00ff00; /* Bright green cursor */
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Remove blink animation when typing or deleting */
+.typewriter-text.typing .cursor {
+    animation: none;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes colorCycle {
+    0% {
+        color: #00ff00; /* Bright green */
+    }
+    25% {
+        color: #00bfff; /* Bright blue */
+    }
+    50% {
+        color: #ff4500; /* Bright orange */
+    }
+    75% {
+        color: #ffff00; /* Bright yellow */
+    }
+    100% {
+        color: #00ff00; /* Bright green */
+    }
+}
