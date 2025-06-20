@@ -1,0 +1,129 @@
+.App-header nav {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background-color: #343a40;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.home header {
+  margin-bottom: 20px;
+}
+
+.home h1 {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+}
+
+.home p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.home .about {
+  max-width: 800px;
+  margin-bottom: 30px;
+}
+
+.home .about h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.home .about p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.projects {
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px; /* Separate from header */
+}
+
+.projects h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project {
+  width: 300px;
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.project h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.project p {
+  font-size: 1em;
+  color: #666;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.App-header nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.App-header nav ul li {
+  margin: 0 5px;
+}
+
+.App-header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  background-color: #007bff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.App-header nav ul li a:hover {
+  background-color: #0056b3;
+}
