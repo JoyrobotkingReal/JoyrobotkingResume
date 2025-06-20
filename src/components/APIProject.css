@@ -1,0 +1,124 @@
+.game-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.game-card img {
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+input {
+  margin: 20px auto;
+  display: block;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.game-card {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card h3 {
+  font-size: 1.2em;
+}
+
+.game-card p {
+  font-size: 0.8em;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    width: 90% !important;
+    max-width: 800px;
+    justify-content: center;
+}
+
+.input-button-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.search-container input {
+    width: 100%;
+    margin-right: 10px;
+    transition: width 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .search-container input {
+        width: 60%;
+    }
+}
+
+.search-container button {
+    margin-left: 0;
+}
+
+.search-container select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.exclude-zero-rating {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+.exclude-zero-rating input {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd; /* Add a border for better visibility */
+    border-radius: 3px; /* Slightly round the corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}

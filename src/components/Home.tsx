@@ -6,7 +6,7 @@ function Home() {
       <div className="header-container">
         <img src="/src/assets/Profile.webp" alt="Profile" className="profile-image" />
         <header>
-            <h1 style={{ color: 'cornflowerblue' }}>Joyrobotking <span style={{ fontSize: '0.7em', color: 'lime' }}>(J.F)</span></h1>
+          <h1 style={{ color: 'cornflowerblue' }}>Joyrobotking <span style={{ fontSize: '0.7em', color: 'lime' }}>(J.F)</span></h1>
           <p>Game Developer & Web Developer</p>
         </header>
         <section className="about">
@@ -17,9 +17,12 @@ function Home() {
           <p>
             I figured I'd make this website to act as a kind of resume, showcasing my skills and projects.
           </p>
-            <p>
+          <p>
             Explore my projects below, or navigate through the site using the menu above to discover more examples of my web development expertise.
-            </p>
+          </p>
+          <p>
+            I made this website somewhat quickly to show on my resume, so it may not be the most polished, but I will be updating it with more projects and features soon.
+          </p>
         </section>
       </div>
       <section className="projects">
