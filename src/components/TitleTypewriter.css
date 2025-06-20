@@ -1,35 +1,34 @@
 .title-typewriter {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Ubuntu Mono', 'Consolas', 'DejaVu Sans Mono', monospace;
     font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px;
-    color: #fff;
+    text-align: left;
+    margin: 20px auto;
+    max-width: 800px;
+    color: #50fa7b;
 }
 
 .terminal-style {
-    background-color: #1e1e1e; /* Dark terminal background */
-    color: #00ff00; /* Bright green text */
+    background-color: #282a36;
     padding: 20px;
-    border-radius: 5px;
-    font-family: 'Courier New', Courier, monospace;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .typewriter-text {
     display: inline-block;
     position: relative;
+    padding: 10px 15px;
 }
 
 .animated-text {
-    animation: fadeIn 0.5s ease-in-out, colorCycle 5s infinite;
+    animation: fadeIn 0.5s ease-in-out;
+    color: #50fa7b;
 }
 
-.cursor {
-    display: inline-block;
-    margin-left: 5px;
-    animation: blink 1s infinite;
-    color: #00ff00; /* Bright green cursor */
+.typewriter-text::before {
+    content: '>';
+    color: #6272a4;
+    margin-right: 10px;
 }
 
 @keyframes blink {
@@ -41,6 +40,17 @@
     }
 }
 
+.cursor {
+    display: inline-block;
+    margin-left: 2px;
+    width: 8px;
+    height: 1.2em;
+    background-color: #50fa7b;
+    animation: blink 1s infinite;
+    position: relative;
+    top: 2px;
+}
+
 /* Remove blink animation when typing or deleting */
 .typewriter-text.typing .cursor {
     animation: none;
@@ -50,11 +60,9 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 

@@ -42,11 +42,16 @@ export class RAWGClient {
      * @method searchGames
      * @description Searches for games.
      * @param {string} query - The search query.
+     * @param {Object} [options] - Optional parameters.
+     * @param {boolean} [options.simulateError] - Whether to simulate an error (for testing purposes).
      * @param {number} [page=1] - The page number to retrieve.
      * @param {number} [pageSize=20] - The number of results per page.
      * @returns {Promise<RAWGResponse<Game>>} - A promise that resolves with the search results.
      */
-    public searchGames(query: string, page: number = 1, pageSize: number = 20): Promise<RAWGResponse<Game>> {
+    public searchGames(query: string, options?: { simulateError?: boolean }, page: number = 1, pageSize: number = 20): Promise<RAWGResponse<Game>> {
+        if (options?.simulateError) {
+            return Promise.reject(new Error("Simulated error for testing purposes"));
+        }
         return this.get<RAWGResponse<Game>>("games", {
             search: query,
             page: page.toString(),

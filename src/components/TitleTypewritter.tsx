@@ -132,7 +132,7 @@ const TitleTypewriter: React.FC = () => {
         <div className="title-typewriter terminal-style">
             <span className={`typewriter-text ${animationData.phase === Phase.Typing || animationData.phase === Phase.Deleting ? 'typing' : ''}`}>
                 <span className="animated-text">{animationData.currentText}</span>
-                <span className="cursor">|</span>
+                <span className="cursor">&nbsp;</span>
             </span>
         </div>
     );
