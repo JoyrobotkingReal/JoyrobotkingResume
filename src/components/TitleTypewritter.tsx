@@ -23,12 +23,14 @@ const _WAIT_AFTER_DELETING_COUNTDOWN = Math.ceil(WAIT_AFTER_DELETING / ANIMATION
 const _CHARACTER_TYPING_SPEED_COUNTDOWN = Math.ceil(CHARACTER_TYPING_SPEED / ANIMATION_INTERVAL);
 const _CHARACTER_DELETING_SPEED_COUNTDOWN = Math.ceil(CHARACTER_DELETING_SPEED / ANIMATION_INTERVAL);
 
-enum Phase {
-    Typing,
-    WaitAfterTyping,
-    Deleting,
-    WaitAfterDeleting,
-}
+// Replace enum Phase with a union type
+// enum Phase {
+//     Typing,
+//     WaitAfterTyping,
+//     Deleting,
+//     WaitAfterDeleting,
+// }
+type Phase = 'Typing' | 'WaitAfterTyping' | 'Deleting' | 'WaitAfterDeleting';
 
 interface AnimationData {
     phase: Phase;
@@ -45,7 +47,7 @@ interface AnimationData {
 
 const TitleTypewriter: React.FC = () => {
     const [animationData, setAnimationData] = useState<AnimationData>({
-        phase: Phase.Typing,
+        phase: 'Typing',
         currentText: "",
         currentIndex: 0,
         cursorFlashCounter: 0,
@@ -60,8 +62,8 @@ const TitleTypewriter: React.FC = () => {
 
             // Update cursor flash logic only when idle
             if (
-                new_animationData.phase === Phase.WaitAfterTyping ||
-                new_animationData.phase === Phase.WaitAfterDeleting
+                new_animationData.phase === 'WaitAfterTyping' ||
+                new_animationData.phase === 'WaitAfterDeleting'
             ) {
                 new_animationData.cursorFlashCooldown--;
                 if (new_animationData.cursorFlashCooldown <= 0) {
@@ -75,7 +77,7 @@ const TitleTypewriter: React.FC = () => {
             }
 
             switch (new_animationData.phase) {
-                case Phase.Typing:
+                case 'Typing':
                     if (new_animationData.characterCooldown > 0) {
                         new_animationData.characterCooldown--;
                     } else {
@@ -83,39 +85,39 @@ const TitleTypewriter: React.FC = () => {
                         new_animationData.currentText += currentTitle[new_animationData.currentText.length];
                         new_animationData.characterCooldown = _CHARACTER_TYPING_SPEED_COUNTDOWN - 1 + Math.floor(Math.random() * 2); // Add slight variation to typing speed
                         if (new_animationData.currentText === currentTitle) {
-                            new_animationData.phase = Phase.WaitAfterTyping;
+                            new_animationData.phase = 'WaitAfterTyping';
                             new_animationData.waitCooldown = _WAIT_AFTER_TYPING_COUNTDOWN; // Adjust wait time after typing
                         }
                     }
                     break;
 
-                case Phase.WaitAfterTyping:
+                case 'WaitAfterTyping':
                     if (new_animationData.waitCooldown > 0) {
                         new_animationData.waitCooldown--;
                     } else {
-                        new_animationData.phase = Phase.Deleting;
+                        new_animationData.phase = 'Deleting';
                     }
                     break;
 
-                case Phase.Deleting:
+                case 'Deleting':
                     if (new_animationData.characterCooldown > 0) {
                         new_animationData.characterCooldown--;
                     } else {
                         new_animationData.currentText = new_animationData.currentText.slice(0, -1);
                         new_animationData.characterCooldown = _CHARACTER_DELETING_SPEED_COUNTDOWN - 1; // Adjust deleting speed
                         if (new_animationData.currentText === "") {
-                            new_animationData.phase = Phase.WaitAfterDeleting;
+                            new_animationData.phase = 'WaitAfterDeleting';
                             new_animationData.waitCooldown = _WAIT_AFTER_DELETING_COUNTDOWN; // Adjust wait time after deleting
                             new_animationData.currentIndex = (new_animationData.currentIndex + 1) % TITLES.length;
                         }
                     }
                     break;
 
-                case Phase.WaitAfterDeleting:
+                case 'WaitAfterDeleting':
                     if (new_animationData.waitCooldown > 0) {
                         new_animationData.waitCooldown--;
                     } else {
-                        new_animationData.phase = Phase.Typing;
+                        new_animationData.phase = 'Typing';
                     }
                     break;
 
@@ -130,7 +132,7 @@ const TitleTypewriter: React.FC = () => {
 
     return (
         <div className="title-typewriter terminal-style">
-            <span className={`typewriter-text ${animationData.phase === Phase.Typing || animationData.phase === Phase.Deleting ? 'typing' : ''}`}>
+            <span className={`typewriter-text ${animationData.phase === 'Typing' || animationData.phase === 'Deleting' ? 'typing' : ''}`}>
                 <span className="animated-text">{animationData.currentText}</span>
                 <span className="cursor">&nbsp;</span>
             </span>

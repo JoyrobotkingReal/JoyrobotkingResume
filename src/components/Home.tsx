@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography, Avatar, Paper, Link as MuiLink, Card, CardContent, CardMedia } from '@mui/material';
 import TitleTypewriter from './TitleTypewritter';
 
