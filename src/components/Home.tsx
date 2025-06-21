@@ -1,12 +1,14 @@
 import { Box, Typography, Avatar, Paper, Link as MuiLink, Card, CardContent, CardMedia } from '@mui/material';
 import TitleTypewriter from './TitleTypewritter';
+import profileImg from '../assets/Profile.webp';
+import v3Banner from '../assets/V3Banner.webp';
 
 function Home() {
   return (
     <Box className="home" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 3, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <Paper elevation={3} sx={{ p: 4, mb: 4, width: '100%', maxWidth: 900, borderRadius: 2 }}>
         <Box className="header-container" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <Avatar src="/src/assets/Profile.webp" alt="Profile" sx={{ width: 150, height: 150, mb: 2, boxShadow: 3 }} />
+          <Avatar src={profileImg} alt="Profile" sx={{ width: 150, height: 150, mb: 2, boxShadow: 3 }} />
           <header>
             <Typography variant="h2" sx={{ color: 'cornflowerblue', mb: 1, fontWeight: 'bold' }}>
               Joyrobotking <Box component="span" sx={{ fontSize: '0.7em', color: 'lime', fontWeight: 'normal' }}>(J.F)</Box>
@@ -50,7 +52,7 @@ function Home() {
             <CardMedia
               component="img"
               height="180"
-              image="/src/assets/V3Banner.webp"
+              image={v3Banner}
               alt="Project"
               sx={{ borderRadius: '4px 4px 0 0' }}
             />

@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import { HashRouter, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import APIProject from './components/APIProject';
 import { AppBar, Toolbar, Typography, Box, Button, IconButton } from '@mui/material';
@@ -30,7 +30,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App" style={{ paddingTop: '64px' }}>
         <AppBar 
           position="fixed" 
@@ -101,7 +101,7 @@ function App() {
           <Route path="/api-project" element={<APIProject />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
